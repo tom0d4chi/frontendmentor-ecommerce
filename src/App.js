@@ -1,32 +1,36 @@
+import "./index.css";
+import { useState } from "react";
+import Header from "./components/Header";
+import Product from "./components/Product";
+
+const sneakers = {
+  id:1,
+  company: "Sneaker Company",
+  name: "Fall Limited Edition Sneakers",
+  description:
+    "These low-profile sneakers are our perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
+  originalPrice: 250,
+  sale: 50,
+};
+
+
 const App = () => {
+
+
+
+
+  const [cart, setCart] = useState({
+    id:1,
+    items:[]
+  })
+
   return (
-    <div className="App">
-      Collections
-        Men
-        Women
-        About
-        Contact
-
-        Sneaker Company
-
-        Fall Limited Edition Sneakers
-
-        These low-profile sneakers are your perfect casual wear companion. Featuring a 
-        durable rubber outer sole, they’ll withstand everything the weather can offer.
-
-        $125.00
-        50%
-        $250.00
-
-        0
-        Add to cart
-        
-        <div class="attribution">
-          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-          Coded by <a href="#">Your Name Here</a>.
-        </div>
+    <div className="App flex flex-col">
+      <Header cart={cart} setCart = {setCart}/>
+      <hr className="md:w-5/6 md:self-center" />
+      <Product product={sneakers} cart={cart} setCart={setCart}/>
     </div>
   );
-}
+};
 
 export default App;
