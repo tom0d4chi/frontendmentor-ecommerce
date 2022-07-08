@@ -2,23 +2,20 @@ import React from "react";
 import logo from "../assets/images/logo.svg";
 import imageAvatar from "../assets/images/image-avatar.png";
 import Cart from "./Cart.js";
-import { useState, useEffect } from "react";
-
-
-
 
 const Header = ({ cart, setCart }) => {
-
-  const [cartDisplay, setCartDisplay] = useState(false);
   const handleCartClick = () => {
-    if (cartDisplay === false) {
-      setCartDisplay(true);
-    } else setCartDisplay(false)
-  }
-
-  useEffect(() => {
-    console.log(cart)
-  }, [cart])
+    if (cart.isActive === false) {
+      setCart({
+        ...cart,
+        isActive: true,
+      });
+    } else
+      setCart({
+        ...cart,
+        isActive: false,
+      });
+  };
 
   return (
     <header className="flex items-center justify-between width-full bg-white md:px-40 md:h-28 z-50 md:text-grayish-blue md:flex-none">
@@ -65,12 +62,7 @@ const Header = ({ cart, setCart }) => {
           >
             <b>3</b>
           </div>
-          <Cart
-            cart={cart}
-            setCart={setCart}
-            cartState={cartDisplay}
-            setCartState={setCartDisplay}
-          />
+          <Cart cart={cart} setCart={setCart} />
         </div>
         <img
           src={imageAvatar}

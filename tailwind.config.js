@@ -8,6 +8,9 @@ module.exports = {
      fontFamily:{
       'sans' : ['Kumbh Sans', 'sans']
      },
+     fontWeight:{
+      medium:500,
+     },
      colors: {
       'orange' : 'hsl(26, 100%, 55%)',
       'pale-orange': 'hsl(25, 100%, 94%)',
@@ -26,5 +29,6 @@ module.exports = {
   plugins: [
     require('tailwindcss'),
     require('autoprefixer'),
+    require('tailwind-scrollbar-hide')
   ]
 }

@@ -44,14 +44,30 @@ const Product = ({ product, cart, setCart }) => {
 
   const handleAddToCart = () => {
     if (itemQuantity > 0){
-      const newCart = cart
-      const newProduct = product
-      newProduct.quantity = itemQuantity
-      newCart.items.push(newProduct)
+      if (cart.items.filter(item => item.id === product.id).length > 0){
+        setCart({
+          ...cart,
+          items : cart.items.map(item => {
+            if (item.id === product.id){
+              return {...item, quantity : item.quantity + itemQuantity}
+            }
+          })
+        })
+      } 
+      else{
+        setCart({
+          ...cart,
+          items : cart.items.concat(Object.assign({},product,{quantity:itemQuantity}))
+        })
+      }
+
+
+
+      
+
       setItemQuantity(0)
-      setCart(newCart)
     }
-    
+
   };
 
   return (
