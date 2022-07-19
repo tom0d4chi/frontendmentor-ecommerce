@@ -5,7 +5,9 @@
 
 html{
     font-family: 'Kumbh Sans', sans-serif;
-    font-size:17px
+    font-size:17px;
+    background-color:white;
+    overflow-y:scroll
 }
 
 html,body, #root, .App{

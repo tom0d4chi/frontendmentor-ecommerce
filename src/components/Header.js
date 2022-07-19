@@ -1,41 +1,94 @@
 import React from "react";
+import { useState } from "react";
 import logo from "../assets/images/logo.svg";
+import close from "../assets/images/icon-close.svg";
 import imageAvatar from "../assets/images/image-avatar.png";
 import Cart from "./Cart.js";
 
 const Header = ({ cart, setCart }) => {
+  const [navbarVisible, setnavbarVisible] = useState(false);
+
+  const handleDropdownClick = () => {
+    setnavbarVisible(!navbarVisible);
+  };
+
   const handleCartClick = () => {
-    if (cart.isActive === false) {
-      setCart({
-        ...cart,
-        isActive: true,
-      });
-    } else
-      setCart({
-        ...cart,
-        isActive: false,
-      });
+    setCart({
+      ...cart,
+      isActive: !cart.isActive,
+    });
   };
 
   return (
-    <header className="flex items-center justify-between width-full bg-white md:px-40 md:h-28 z-50 md:text-grayish-blue md:flex-none">
-      <div id="header-left" className="flex items-center md:h-full">
-        <img src={logo} alt="logo" />
-        <nav className="pl-12 md:h-full md:overflow-visible text-sm">
-          <ul className="md:flex md:h-full">
-            <li className="md:mr-8 md:h-full md:flex md:items-center cursor-pointer box-border border-orange border-t-transparent border-solid md:hover:border-t-4 md:hover:border-b-4 md:hover:text-dark-grayish-blue">
+    <header className="fixed sm:relative flex flex-none items-center justify-between w-full  bg-white sm:bg-red px-5 sm:px-20 lg:px-40 h-16 sm:h-28 z-50 transition-all text-grayish-blue">
+      <div id="dark-bg-mobile-navbar" onClick={handleDropdownClick} className={`w-screen h-screen fixed inset-0 bg-black z-30 dd:invisible transition-all ${navbarVisible  ? "visible opacity-50" : "invisible opacity-0"}`}></div>
+     <div id="header-left" className="flex items-center h-full">
+        <svg
+          id="dropdown-button"
+          width="16"
+          height="15"
+          xmlns="http://www.w3.org/2000/svg"
+          className="mr-5 flex-none dd:invisible lg:opacity-0 opacity-100 transition-all fill-[#69707D] hover:fill-black sm:absolute  cursor-pointer"
+          onClick={handleDropdownClick}
+        >
+          <path
+            d="M16 12v3H0v-3h16Zm0-6v3H0V6h16Zm0-6v3H0V0h16Z"
+            fillRule="evenodd"
+          />
+        </svg>
+
+        <img src={logo} alt="logo" className="mb-[4px] sm:translate-x-10 dd:translate-x-0 transition-all"/>
+        <nav
+          className={`
+            dd:pl-12 
+            p-4
+            dd:p-0
+            dd:h-full 
+            w-64 
+            dd:w-auto 
+            dd:overflow-visible 
+            dd:text-sm 
+            dd:visible
+            dd:-translate-x-0
+            -translate-x-full
+            flex 
+            dd:flex-row
+            dd:static
+            dd:font-normal
+            dd:z-auto
+            dd:opacity-100
+            z-30
+            flex-col
+            font-bold
+            dd:text-grayish-blue
+            text-black
+            text-md
+            fixed 
+            top-0
+            left-0
+            h-screen
+            dd:bg-transparent 
+            dd:transition-none
+            transition-transform
+            will-change-transform
+            bg-white 
+            ${navbarVisible ? "visible translate-x-0" : "invisible opacity-0"}`}
+        >
+          <img src={close} alt="" className={`h-4 w-4 mb-14 dd:invisible cursor-pointer ${navbarVisible ? "visible" : "invisible"}`} onClick={handleDropdownClick} />
+          <ul className="dd:flex dd:h-full transition-all sm:transition-none">
+            <li className="dd:mr-8 dd:mb-0 mb-4 dd:h-full dd:flex dd:items-center cursor-pointer box-border border-b-orange border-t-transparent hover:border-solid hover:border-t-4 hover:border-b-4 dd:hover:text-dark-grayish-blue transition-[border]">
               Collections
             </li>
-            <li className="md:mr-8 md:h-full md:flex md:items-center cursor-pointer box-border border-orange border-t-transparent border-solid md:hover:border-t-4 md:hover:border-b-4 md:hover:text-dark-grayish-blue">
+            <li className="dd:mr-8 dd:mb-0 mb-4 dd:h-full dd:flex dd:items-center cursor-pointer box-border border-b-orange border-t-transparent hover:border-solid hover:border-t-4 hover:border-b-4 dd:hover:text-dark-grayish-blue transition-[border]">
               Men
             </li>
-            <li className="md:mr-8 md:h-full md:flex md:items-center cursor-pointer box-border border-orange border-t-transparent border-solid md:hover:border-t-4 md:hover:border-b-4 md:hover:text-dark-grayish-blue">
+            <li className="dd:mr-8 dd:mb-0 mb-4 dd:h-full dd:flex dd:items-center cursor-pointer box-border border-b-orange border-t-transparent hover:border-solid hover:border-t-4 hover:border-b-4 dd:hover:text-dark-grayish-blue transition-[border]">
               Women
             </li>
-            <li className="md:mr-8 md:h-full md:flex md:items-center cursor-pointer box-border border-orange border-t-transparent border-solid md:hover:border-t-4 md:hover:border-b-4 md:hover:text-dark-grayish-blue">
+            <li className="dd:mr-8 dd:mb-0 mb-4 dd:h-full dd:flex dd:items-center cursor-pointer box-border border-b-orange border-t-transparent hover:border-solid hover:border-t-4 hover:border-b-4 dd:hover:text-dark-grayish-blue transition-[border]">
               About
             </li>
-            <li className="md:mr-8 md:h-full md:flex md:items-center cursor-pointer box-border border-orange border-t-transparent border-solid md:hover:border-t-4 md:hover:border-b-4 md:hover:text-dark-grayish-blue">
+            <li className="dd:mr-8 dd:mb-0 mb-4 dd:h-full dd:flex dd:items-center cursor-pointer box-border border-b-orange border-t-transparent hover:border-solid hover:border-t-4 hover:border-b-4 dd:hover:text-dark-grayish-blue transition-[border]">
               Contact
             </li>
           </ul>
@@ -43,12 +96,15 @@ const Header = ({ cart, setCart }) => {
       </div>
 
       <div id="header-right" className="flex flex-none items-center">
-        <div id="cart-container" className="mr-8 w-[22px] h-[20px] relative">
+        <div
+          id="cart-container"
+          className="sm:mr-8 mr-4 w-[22px] h-[20px] relative"
+        >
           <svg
             width="22"
             height="20"
             xmlns="http://www.w3.org/2000/svg"
-            className="fill-[#69707D] hover:fill-black cursor-pointer"
+            className="fill-[#69707D] hover:fill-black cursor-pointer transition-all"
             onClick={handleCartClick}
           >
             <path
@@ -56,18 +112,30 @@ const Header = ({ cart, setCart }) => {
               fillRule="nonzero"
             ></path>
           </svg>
-          <div
-            id="cart-items-number"
-            className="text-white bg-orange rounded-xl w-[1.15rem] h-3 text-[10px] flex items-center justify-center z-40 -top-1.5 -right-2.5 absolute"
-          >
-            <b>3</b>
+          <div 
+          id="cart-items-number-container"
+          className="flex items-center justify-center w-[1.15rem] h-3 -top-1.5 -right-2.5 absolute">
+            <div
+              id="cart-items-number"
+              className={`${
+                cart.items.length === 0 ? "invisible h-0 w-0" : "visible h-full w-full"
+              } transition-all text-white bg-orange rounded-xl flex text-[10px] items-center justify-center z-20 `}
+            >
+              <b className={`${cart.items.length === 0 ? "invisible" : "visible"}`}>
+                {cart.items.reduce(
+                  (previousValue, currentValue) =>
+                    previousValue + currentValue.quantity,
+                  0
+                )}
+              </b>
+            </div>
           </div>
           <Cart cart={cart} setCart={setCart} />
         </div>
         <img
           src={imageAvatar}
           alt=""
-          className="w-6 h-6 md:w-11 md:h-11 border-orange rounded-full box-border flex-none md:hover:border-2 md:hover:cursor-pointer"
+          className="w-6 h-6 sm:w-11 sm:h-11 border-orange rounded-full box-border flex-none sm:hover:border-2 hover:cursor-pointer transition-all duration-75"
         />
       </div>
     </header>

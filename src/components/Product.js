@@ -1,27 +1,42 @@
 import React from "react";
 import { useState } from "react";
 import Images from "../assets/images/images";
-import Thumbnails from "../assets/images/thumbnails";
+import Thumbnail from "./Thumbnail";
+import previous from "../assets/images/icon-previous.svg";
+import next from "../assets/images/icon-next.svg";
+import close from "../assets/images/icon-close.svg";
 
 const Product = ({ product, cart, setCart }) => {
   const [displayedImage, setDisplayedImage] = useState(0);
   const [itemQuantity, setItemQuantity] = useState(0);
-
+  const [lightBox, setlightBox] = useState(false);
 
   const handleThumbnailClick = (thumbnail) => {
     return () => {
-      const oldThumbnail = document.getElementById(
-        "thumbnail-" + displayedImage
-      );
-      oldThumbnail.style.borderStyle = "none";
-      oldThumbnail.style.opacity = 1;
-
-      const newThumbnail = document.getElementById("thumbnail-" + thumbnail);
-      newThumbnail.style.border = "solid 2px orange";
-      newThumbnail.style.opacity = 0.5;
-
       setDisplayedImage(thumbnail);
     };
+  };
+
+  const displayLightBox = () => {
+    setlightBox(!lightBox);
+  };
+
+  const handlePreviousClick = () => {
+    if (displayedImage === 0) {
+      setDisplayedImage(3);
+    } else {
+      setDisplayedImage(displayedImage - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (displayedImage === 3) {
+      setDisplayedImage(0);
+
+    } else {
+      setDisplayedImage(displayedImage + 1);
+
+    }
   };
 
   const handleMinusClick = () => {
@@ -43,115 +58,193 @@ const Product = ({ product, cart, setCart }) => {
   };
 
   const handleAddToCart = () => {
-    if (itemQuantity > 0){
-      if (cart.items.filter(item => item.id === product.id).length > 0){
+    if (itemQuantity > 0) {
+      if (cart.items.filter((item) => item.id === product.id).length > 0) {
         setCart({
           ...cart,
-          items : cart.items.map(item => {
-            if (item.id === product.id){
-              return {...item, quantity : item.quantity + itemQuantity}
+          items: cart.items.map((item) => {
+            if (item.id === product.id) {
+              return { ...item, quantity: item.quantity + itemQuantity };
             }
-          })
-        })
-      } 
-      else{
+          }),
+        });
+      } else {
         setCart({
           ...cart,
-          items : cart.items.concat(Object.assign({},product,{quantity:itemQuantity}))
-        })
+          items: cart.items.concat(
+            Object.assign({}, product, { quantity: itemQuantity })
+          ),
+        });
       }
 
-
-
-      
-
-      setItemQuantity(0)
+      setItemQuantity(0);
     }
-
   };
 
   return (
-    <div className="flex justify-center items-center md:h-full">
+    <div className="flex justify-center items-center h-full">
       <div
         id="product"
-        className="flex md:items-center md:w-4/6 md:h-[30.5rem] md:justify-around"
+        className="flex flex-col md:flex-row md:items-center  md:w-1/3 dd:w-4/6 md:h-[24rem] dd:h-[30.5rem] md:justify-around"
       >
         <div
           id="product-images"
-          className="flex md:flex-col md:flex-none md:justify-between md:w-96 md:h-full"
+          className="flex md:flex-col md:flex-none md:justify-between md:w-72 dd:w-96 md:h-full"
         >
-          <img
-            src={Images[displayedImage]}
-            alt=""
-            className="md:w-96 md:h-96 rounded-xl"
-          />
-          <div id="product-thumbnails" className="flex justify-between">
+          <div
+            id="lightbox"
+            className={`fixed ${
+              lightBox ? "flex" : "hidden"
+            } w-screen h-screen z-50 inset-0 justify-center items-center`}
+          >
+            <div
+              id="lightbox-bg"
+              className="h-full w-full bg-black opacity-70 absolute"
+              onClick={displayLightBox}
+            ></div>
+            <div id="carousel-container" className="flex flex-col items-center w-[32rem]  relative">
+              <img src={close} alt="" className="z-30 self-end h-5 w-5 mb-5"/>
+              <div id="displayed-image-container" className="relative mb-5">
+                <button
+                  onClick={handlePreviousClick}
+                  className="rounded-full z-30 bg-white shadow-md w-10 h-10 absolute flex justify-center items-center -left-5 top-1/2"
+                >
+                  <img src={previous} alt="" className="h-3 mr-0.5" />
+                </button>
+                <button
+                  onClick={handleNextClick}
+                  className="rounded-full z-30 bg-white shadow-md w-10 h-10 flex justify-center items-center absolute -right-5 top-1/2"
+                >
+                  <img src={next} alt="" className="h-3 ml-0.5" />
+                </button>
+                <img
+                  id="displayed-image"
+                  src={Images[displayedImage]}
+                  alt=""
+                  className="w-full md:rounded-xl"
+                  onClick={displayLightBox}
+                />
+              </div>
+              <div
+                id="product-thumbnails"
+                className="hidden md:flex justify-between w-3/4 z-30"
+              >
+                <Thumbnail
+                  id="0"
+                  displayedImage={displayedImage}
+                  setDisplayedImage={setDisplayedImage}
+                />
+                <Thumbnail
+                  id="1"
+                  displayedImage={displayedImage}
+                  setDisplayedImage={setDisplayedImage}
+                />
+                <Thumbnail
+                  id="2"
+                  displayedImage={displayedImage}
+                  setDisplayedImage={setDisplayedImage}
+                />
+                <Thumbnail
+                  id="3"
+                  displayedImage={displayedImage}
+                  setDisplayedImage={setDisplayedImage}
+                />
+              </div>
+            </div>
+          </div>
+          <div id="displayed-image-container" className="relative">
+            <button
+              onClick={handlePreviousClick}
+              className="rounded-full z-30 md:hidden bg-white shadow-md w-10 h-10 absolute flex justify-center items-center left-3 top-1/2 translate-y-3"
+            >
+              <img src={previous} alt="" className="h-3 mr-0.5" />
+            </button>
+            <button
+              onClick={handleNextClick}
+              className="rounded-full z-30 md:hidden bg-white shadow-md w-10 h-10 flex justify-center items-center absolute right-3 top-1/2 translate-y-3"
+            >
+              <img src={next} alt="" className="h-3 ml-0.5" />
+            </button>
             <img
-              id="thumbnail-0"
-              src={Thumbnails[0]}
+              id="displayed-image"
+              src={Images[displayedImage]}
               alt=""
-              className="cursor-pointer rounded-xl md:hover:opacity-50 md:w-20 md:h-20 border-2  border-orange opacity-50"
-              onClick={handleThumbnailClick(0)}
+              className="md:h-72 md:w-72 dd:w-96 dd:h-96 md:rounded-xl cursor-pointer"
+              onClick={displayLightBox}
             />
-            <img
-              id="thumbnail-1"
-              src={Thumbnails[1]}
-              alt=""
-              className="cursor-pointer rounded-xl md:hover:opacity-50 md:w-20 md:h-20"
-              onClick={handleThumbnailClick(1)}
+          </div>
+          <div
+            id="product-thumbnails"
+            className="hidden md:flex justify-between"
+          >
+            <Thumbnail
+              id="0"
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
             />
-            <img
-              id="thumbnail-2"
-              src={Thumbnails[2]}
-              alt=""
-              className="cursor-pointer rounded-xl md:hover:opacity-50 md:w-20 md:h-20"
-              onClick={handleThumbnailClick(2)}
+            <Thumbnail
+              id="1"
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
             />
-            <img
-              id="thumbnail-3"
-              src={Thumbnails[3]}
-              alt=""
-              className="cursor-pointer rounded-xl md:hover:opacity-50 md:w-20 md:h-20"
-              onClick={handleThumbnailClick(3)}
+            <Thumbnail
+              id="2"
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
+            />
+            <Thumbnail
+              id="3"
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
             />
           </div>
         </div>
 
-        <div id="product-info" className="md:ml-28">
+        <div id="product-info" className="md:ml-20 dd:ml-28 px-5 pt-4 md:px-0 md:pt-0">
           <article>
-            <p className="text-orange font-semibold tracking-widest md:text-sm md:mb-4">
+            <p className="text-orange font-semibold tracking-widest text-xs md:text-md mb-3 md:mb-4">
               {product.company.toUpperCase()}
             </p>
-            <h1 className="text-[2.8rem] font-semibold leading-none md:mb-8">
+            <h1 className="text-[1.8rem] md:text-[2rem] dd:text-[2.8rem] font-bold leading-none md:mb-4 dd:mb-8">
               {product.name}
             </h1>
 
-            <p id="product-description" className="text-grayish-blue md:mb-4">
+            <p
+              id="product-description"
+              className="text-dark-grayish-blue text-md md:text-sm dd:text-base mt-4 md:mt-0 mb-4 break-normal w-full"
+            >
               {product.description}
             </p>
-            <div id="product-price" className="flex items-center">
-              <p className="text-3xl font-bold mr-3">
-                ${((product.originalPrice * product.sale) / 100).toFixed(2)}
-              </p>
-              <p
-                id="product-sale"
-                className="font-bold text-orange bg-pale-orange rounded-md md:w-12 text-center"
-              >
-                {product.sale} %
+
+            <div
+              id="product-price-container"
+              className="flex md:block flex-row items-center w-full justify-between mb-6 "
+            >
+              <div id="product-price" className="flex items-center">
+                <p className="text-3xl font-bold mr-3">
+                  ${((product.originalPrice * product.sale) / 100).toFixed(2)}
+                </p>
+                <p
+                  id="product-sale"
+                  className="font-bold text-orange bg-pale-orange rounded-md w-12 text-center"
+                >
+                  {product.sale} %
+                </p>
+              </div>
+              <p className="line-through text-grayish-blue font-bold">
+                ${product.originalPrice.toFixed(2)}
               </p>
             </div>
-            <p className="line-through text-grayish-blue text-bold md:mb-6">
-              ${product.originalPrice.toFixed(2)}
-            </p>
-            <div id="cart-buttons" className="flex">
+
+            <div id="product-buttons" className="flex md:flex-row flex-col">
               <div
                 id="quantity-button"
-                className="flex items-center justify-between rounded-lg md:h-14 md:w-36 font-bold bg-light-grayish-blue"
+                className="flex items-center justify-between rounded-lg px-6 mb-4 md:mb-0 md:px-0 h-14 md:w-36 font-bold bg-light-grayish-blue"
               >
                 <button
                   id="minus-button"
                   onClick={handleMinusClick()}
-                  className="text-orange text-2xl h-full md:hover:opacity-50 md:w-1/3"
+                  className="text-orange text-2xl h-full hover:opacity-50 md:w-1/3 transition-all"
                 >
                   -
                 </button>
@@ -159,7 +252,7 @@ const Product = ({ product, cart, setCart }) => {
                 <button
                   id="plus-button"
                   onClick={handlePlusClick()}
-                  className="text-orange text-2xl h-full md:hover:opacity-50 md:w-1/3"
+                  className="text-orange text-2xl h-full md:hover:opacity-50 md:w-1/3 transition-all"
                 >
                   +
                 </button>
@@ -167,7 +260,7 @@ const Product = ({ product, cart, setCart }) => {
               <button
                 id="add-button"
                 onClick={handleAddToCart}
-                className="flex items-center justify-center rounded-lg ml-4 md:w-72 md:h-14 md:hover:opacity-50 bg-orange text-white shadow-xl shadow-orange"
+                className="flex items-center justify-center rounded-lg md:w-72 h-14 hover:opacity-50 md:ml-4 bg-orange text-white shadow-xl shadow-orange transition-all"
               >
                 <svg
                   className="fill-white"

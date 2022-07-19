@@ -20,13 +20,15 @@ const App = () => {
 
   const [cart, setCart] = useState({
     isActive:false,
-    items:[]
+    items:[
+
+    ]
   })
 
   return (
     <div className="App flex flex-col">
       <Header cart={cart} setCart = {setCart}/>
-      <hr className="md:w-5/6 md:self-center" />
+      <hr className="hidden sm:block w-5/6 self-center" />
       <Product product={sneakers} cart={cart} setCart={setCart}/>
     </div>
   );
