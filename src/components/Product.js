@@ -11,12 +11,6 @@ const Product = ({ product, cart, setCart }) => {
   const [itemQuantity, setItemQuantity] = useState(0);
   const [lightBox, setlightBox] = useState(false);
 
-  const handleThumbnailClick = (thumbnail) => {
-    return () => {
-      setDisplayedImage(thumbnail);
-    };
-  };
-
   const displayLightBox = () => {
     setlightBox(!lightBox);
   };
@@ -94,8 +88,8 @@ const Product = ({ product, cart, setCart }) => {
           <div
             id="lightbox"
             className={`fixed ${
-              lightBox ? "flex" : "hidden"
-            } w-screen h-screen z-50 inset-0 justify-center items-center`}
+              lightBox ? "visible opacity-100" : "invisible opacity-0"
+            } hidden sm:flex w-screen h-screen z-50 inset-0 justify-center items-center tansition-all`}
           >
             <div
               id="lightbox-bg"
@@ -130,25 +124,25 @@ const Product = ({ product, cart, setCart }) => {
                 className="hidden md:flex justify-between w-3/4 z-30"
               >
                 <Thumbnail
-                  id="0"
-                  displayedImage={displayedImage}
-                  setDisplayedImage={setDisplayedImage}
-                />
-                <Thumbnail
-                  id="1"
-                  displayedImage={displayedImage}
-                  setDisplayedImage={setDisplayedImage}
-                />
-                <Thumbnail
-                  id="2"
-                  displayedImage={displayedImage}
-                  setDisplayedImage={setDisplayedImage}
-                />
-                <Thumbnail
-                  id="3"
-                  displayedImage={displayedImage}
-                  setDisplayedImage={setDisplayedImage}
-                />
+              thumbnailId={0}
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
+            />
+            <Thumbnail
+              thumbnailId={1}
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
+            />
+            <Thumbnail
+              thumbnailId={2}
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
+            />
+            <Thumbnail
+              thumbnailId={3}
+              displayedImage={displayedImage}
+              setDisplayedImage={setDisplayedImage}
+            />
               </div>
             </div>
           </div>
@@ -169,7 +163,7 @@ const Product = ({ product, cart, setCart }) => {
               id="displayed-image"
               src={Images[displayedImage]}
               alt=""
-              className="md:h-72 md:w-72 dd:w-96 dd:h-96 md:rounded-xl cursor-pointer"
+              className="md:h-72 md:w-72 dd:w-96 dd:h-96 sm:hover:opacity-50 transition-opacity  md:rounded-xl cursor-pointer"
               onClick={displayLightBox}
             />
           </div>
@@ -178,22 +172,22 @@ const Product = ({ product, cart, setCart }) => {
             className="hidden md:flex justify-between"
           >
             <Thumbnail
-              id="0"
+              thumbnailId={0}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
             />
             <Thumbnail
-              id="1"
+              thumbnailId={1}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
             />
             <Thumbnail
-              id="2"
+              thumbnailId={2}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
             />
             <Thumbnail
-              id="3"
+              thumbnailId={3}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
             />

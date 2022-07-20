@@ -19,7 +19,7 @@ const Cart = ({ cart, setCart }) => {
         cart.isActive ? "visible opacity-100" : "invisible -translate-y-3 opacity-0"
       } fixed flex transition-all overflow-scroll scrollbar-hide flex-col p-5 bg-white h-52 w-[22rem] rounded-xl shadow-xl z-20 top-[4.5rem] left-1/2 -translate-x-1/2 sm:absolute sm:top-10`}
     >
-      <div className="text-black font-semibold text-sm h-10 pv-5">Cart</div>
+      <div className="text-black font-semibold text-sm pb-3">Cart</div>
       <hr className="-mx-5" />
       <div
         id="cart-content"
@@ -71,8 +71,8 @@ const Cart = ({ cart, setCart }) => {
        
         <button
           className={`${
-            cart.items.length > 0 ? "visible" : "invisible h-0 w-0"
-          } hover:opacity-50 h-12 w-full transition-[visibility] bg-orange text-white font-medium rounded-lg`}
+            cart.items.length > 0 ? "visible opacity-100" : "invisible opacity-0 absolute h-0 w-0"
+          } hover:opacity-50 h-12 w-full transition-opacity bg-orange text-white font-medium rounded-lg`}
         >
           Checkout
         </button>
@@ -81,7 +81,7 @@ const Cart = ({ cart, setCart }) => {
             cart.items.length === 0 ? "flex" : "hidden"
           } h-full w-full justify-center items-center`}
         >
-          <p className="select-none">Your cart is empty</p>
+          <p className="select-none pt-5">Your cart is empty</p>
         </div>
       </div>
     </div>

@@ -20,6 +20,7 @@ module.exports = {
       'light-grayish-blue' : 'hsl(223, 64%, 98%)',
       'white' : 'hsl(0, 0%, 100%)',
       'black' : 'hsl(0, 0%, 0%)',
+      'transparent-white' : 'rgba(255,255,255,0.5)'
      },
      boxShadow: {
       'xl' : '0 17px 35px -17px rgba(0, 0, 0, 0.3)'
