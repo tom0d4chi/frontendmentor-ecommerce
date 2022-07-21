@@ -97,7 +97,19 @@ const Product = ({ product, cart, setCart }) => {
               onClick={displayLightBox}
             ></div>
             <div id="carousel-container" className="hidden md:flex flex-col items-center w-[32rem] relative">
-              <img src={close} alt="" className="z-30 self-end h-5 w-5 mb-5"/>
+
+              <svg 
+                width="14px"
+                height="15px"
+                xmlns="http://www.w3.org/2000/svg"
+                className="flex transition-all items-center justify-center fill-[#69707D] hover:fill-white cursor-pointer h-5 w-5 mb-4 first-letter:transition-all self-end"
+                viewBox="0 0 14 14"
+                onClick={displayLightBox}
+                >
+                <path 
+                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                />
+              </svg>
               <div id="carousel-displayed-image-container" className="relative mb-5">
                 <button
                   onClick={handlePreviousClick}
@@ -127,21 +139,25 @@ const Product = ({ product, cart, setCart }) => {
               thumbnailId={0}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={true}
             />
             <Thumbnail
               thumbnailId={1}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={true}
             />
             <Thumbnail
               thumbnailId={2}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={true}
             />
             <Thumbnail
               thumbnailId={3}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={true}
             />
               </div>
             </div>
@@ -175,21 +191,25 @@ const Product = ({ product, cart, setCart }) => {
               thumbnailId={0}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={false}
             />
             <Thumbnail
               thumbnailId={1}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={false}
             />
             <Thumbnail
               thumbnailId={2}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={false}
             />
             <Thumbnail
               thumbnailId={3}
               displayedImage={displayedImage}
               setDisplayedImage={setDisplayedImage}
+              carousel={false}
             />
           </div>
         </div>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import close from "../assets/images/icon-close.svg";
 import imageAvatar from "../assets/images/image-avatar.png";
-import Cart from "./Cart.js";
+import Cart from "./Cart.jsx";
 
 const Header = ({ cart, setCart }) => {
   const [navbarVisible, setnavbarVisible] = useState(false);
