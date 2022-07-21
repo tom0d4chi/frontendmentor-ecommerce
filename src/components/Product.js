@@ -89,16 +89,16 @@ const Product = ({ product, cart, setCart }) => {
             id="lightbox"
             className={`fixed ${
               lightBox ? "visible opacity-100" : "invisible opacity-0"
-            } hidden sm:flex w-screen h-screen z-50 inset-0 justify-center items-center tansition-all`}
+            } hidden md:flex w-screen h-screen z-50 inset-0 justify-center items-center tansition-all`}
           >
             <div
               id="lightbox-bg"
               className="h-full w-full bg-black opacity-70 absolute"
               onClick={displayLightBox}
             ></div>
-            <div id="carousel-container" className="flex flex-col items-center w-[32rem]  relative">
+            <div id="carousel-container" className="hidden md:flex flex-col items-center w-[32rem] relative">
               <img src={close} alt="" className="z-30 self-end h-5 w-5 mb-5"/>
-              <div id="displayed-image-container" className="relative mb-5">
+              <div id="carousel-displayed-image-container" className="relative mb-5">
                 <button
                   onClick={handlePreviousClick}
                   className="rounded-full z-30 bg-white shadow-md w-10 h-10 absolute flex justify-center items-center -left-5 top-1/2"
@@ -112,7 +112,7 @@ const Product = ({ product, cart, setCart }) => {
                   <img src={next} alt="" className="h-3 ml-0.5" />
                 </button>
                 <img
-                  id="displayed-image"
+                  id="carousel-displayed-image"
                   src={Images[displayedImage]}
                   alt=""
                   className="w-full md:rounded-xl"
@@ -120,8 +120,8 @@ const Product = ({ product, cart, setCart }) => {
                 />
               </div>
               <div
-                id="product-thumbnails"
-                className="hidden md:flex justify-between w-3/4 z-30"
+                id="carousel-product-thumbnails"
+                className="flex justify-between w-3/4 z-30"
               >
                 <Thumbnail
               thumbnailId={0}
@@ -163,7 +163,7 @@ const Product = ({ product, cart, setCart }) => {
               id="displayed-image"
               src={Images[displayedImage]}
               alt=""
-              className="md:h-72 md:w-72 dd:w-96 dd:h-96 sm:hover:opacity-50 transition-opacity  md:rounded-xl cursor-pointer"
+              className="md:h-72 md:w-72 dd:w-96 dd:h-96 md:hover:opacity-50 transition-opacity  md:rounded-xl cursor-pointer"
               onClick={displayLightBox}
             />
           </div>
