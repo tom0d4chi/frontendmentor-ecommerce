@@ -4,6 +4,11 @@ import Header from "./components/Header";
 import Product from "./components/Product";
 import Images from "./assets/images/images";
 
+
+
+
+
+
 const sneakers = {
   id:1,
   company: "Sneaker Company",

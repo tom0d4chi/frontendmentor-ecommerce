@@ -6,7 +6,7 @@ const Cart = ({ cart, setCart }) => {
       setCart({
         ...cart,
         items: cart.items.filter((item) => {
-          return item.id != itemId;
+          return item.id !== itemId;
         }),
       });
     };
