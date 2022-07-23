@@ -11,7 +11,7 @@ This is a solution to the [E-commerce product page challenge on Frontend Mentor]
 - [Overview](#overview)
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
-  - [Links](#links)
+  - [Link](#link)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
@@ -24,6 +24,7 @@ This is a solution to the [E-commerce product page challenge on Frontend Mentor]
 
 ### The challenge
 
+The challenge was to integrate a webpage relying on screenshots.
 Users should be able to:
 
 - ✅ View the optimal layout for the site depending on their device's screen size 
